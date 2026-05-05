@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ழகரம் | Lagaram – Food & Books</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Tiro+Tamil:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #E8651A;
+    --deep: #1A0A00;
+    --cream: #FDF6EC;
+    --gold: #C9922A;
+    --leaf: #2D6A4F;
+    --rose: #C0392B;
+    --text: #2C1A0E;
+    --muted: #7A5C3E;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(253,246,236,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,146,42,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--saffron);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--saffron); }
+
+  .nav-cta {
+    background: var(--saffron);
+    color: #fff !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.85rem !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold) !important; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 5% 4rem;
+    position: relative;
+    overflow: hidden;
+    gap: 3rem;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-bg-circle.c1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,101,26,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    animation: float1 8s ease-in-out infinite;
+  }
+
+  .hero-bg-circle.c2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(201,146,42,0.1) 0%, transparent 70%);
+    bottom: 50px; left: -80px;
+    animation: float2 10s ease-in-out infinite;
+  }
+
+  @keyframes float1 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-20px, 30px) scale(1.05); }
+  }
+  @keyframes float2 {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(15px, -20px); }
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 1.5px;
+    background: var(--saffron);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--deep);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title .highlight {
+    color: var(--saffron);
+    display: block;
+  }
+
+  .hero-title .tamil {
+    font-family: 'Tiro Tamil', serif;
+    font-style: italic;
+    font-size: 0.6em;
+    color: var(--gold);
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--saffron);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(232,101,26,0.35);
+  }
+
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(232,101,26,0.45); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border: 1.5px solid var(--text);
+    color: var(--text);
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { background: var(--text); color: var(--cream); }
+
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .hero-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+    animation: fadeUp 0.8s both;
+  }
+
+  .hero-card:hover { transform: translateY(-5px); }
+
+  .hero-card:nth-child(1) { animation-delay: 0.1s; }
+  .hero-card:nth-child(2) { margin-top: 2rem; animation-delay: 0.2s; }
+  .hero-card:nth-child(3) { animation-delay: 0.3s; }
+  .hero-card:nth-child(4) { margin-top: -2rem; animation-delay: 0.4s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-card-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; }
+
+  .hero-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-card-sub {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-top: 0.6rem;
+  }
+
+  .badge-food { background: rgba(232,101,26,0.12); color: var(--saffron); }
+  .badge-book { background: rgba(45,106,79,0.12); color: var(--leaf); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 5%;
+    margin: 1rem 0;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,146,42,0.3), transparent);
+  }
+
+  .divider-icon { color: var(--gold); font-size: 1.2rem; }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 6rem 5%;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    color: var(--deep);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ── FOOD SECTION ── */
+  .food-section { background: var(--cream); }
+
+  .food-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 3.5rem;
+  }
+
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .food-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .food-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+
+  .food-img {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .food-img-bg1 { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+  .food-img-bg2 { background: linear-gradient(135deg, #FCE4EC, #F8BBD9); }
+  .food-img-bg3 { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); }
+  .food-img-bg4 { background: linear-gradient(135deg, #FFF8E1, #FFECB3); }
+  .food-img-bg5 { background: linear-gradient(135deg, #EDE7F6, #D1C4E9); }
+  .food-img-bg6 { background: linear-gradient(135deg, #E1F5FE, #B3E5FC); }
+
+  .food-body { padding: 1.2rem 1.4rem 1.5rem; }
+
+  .food-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.3rem;
+  }
+
+  .food-desc-text { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
+
+  .food-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .food-price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--saffron);
+  }
+
+  .food-price span { font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+
+  .add-btn {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--saffron);
+    color: #fff;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    line-height: 1;
+  }
+
+  .add-btn:hover { background: var(--gold); transform: scale(1.1); }
+
+  /* ── BOOKS SECTION ── */
+  .books-section {
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .books-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9922A' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .books-section .section-title { color: var(--cream); }
+  .books-section .section-sub { color: rgba(253,246,236,0.6); }
+  .books-section .section-label { color: var(--gold); }
+
+  .books-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    margin-bottom: 3.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .book-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,146,42,0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+    cursor: pointer;
+  }
+
+  .book-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(201,146,42,0.5);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .book-cover {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+  }
+
+  .book-cover-1 { background: linear-gradient(135deg, #1a472a, #2d6a4f); }
+  .book-cover-2 { background: linear-gradient(135deg, #7b1d14, #c0392b); }
+  .book-cover-3 { background: linear-gradient(135deg, #1a237e, #3949ab); }
+  .book-cover-4 { background: linear-gradient(135deg, #4a1942, #7b3f7e); }
+  .book-cover-5 { background: linear-gradient(135deg, #795548, #a1887f); }
+  .book-cover-6 { background: linear-gradient(135deg, #e65100, #ff8f00); }
+
+  .book-spine {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .book-body { padding: 1.1rem 1.2rem 1.4rem; }
+
+  .book-genre {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .book-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+    line-height: 1.3;
+  }
+
+  .book-author { font-size: 0.8rem; color: rgba(253,246,236,0.5); margin-bottom: 0.8rem; }
+
+  .book-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .book-price {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .book-btn {
+    padding: 0.35rem 0.9rem;
+    border: 1.5px solid var(--gold);
+    border-radius: 50px;
+    color: var(--gold);
+    background: transparent;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .book-btn:hover { background: var(--gold); color: var(--deep); }
+
+  /* ── WHY US ── */
+  .why-section { background: #fff; }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .why-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    border-radius: 20px;
+    background: var(--cream);
+    transition: transform 0.3s;
+  }
+
+  .why-card:hover { transform: translateY(-4px); }
+
+  .why-icon {
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 1.2rem;
+  }
+
+  .wi-1 { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+  .wi-2 { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+  .wi-3 { background: linear-gradient(135deg, #fce4ec, #f8bbd9); }
+  .wi-4 { background: linear-gradient(135deg, #ede7f6, #d1c4e9); }
+
+  .why-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .why-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: var(--saffron);
+    padding: 2.5rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .stat { text-align: center; }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.8); font-weight: 500; }
+
+  /* ── TESTIMONIALS ── */
+  .testi-section { background: var(--cream); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testi-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  .testi-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--saffron);
+    opacity: 0.15;
+    position: absolute;
+    top: 0.5rem;
+    left: 1.2rem;
+    line-height: 1;
+  }
+
+  .testi-stars { color: var(--gold); font-size: 1rem; margin-bottom: 0.8rem; }
+
+  .testi-text {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+
+  .testi-person {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #FFE0B2, #FFF3E0);
+  }
+
+  .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--deep); }
+  .testi-loc { font-size: 0.78rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,101,26,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    position: relative;
+    z-index: 2;
+  }
+
+  .contact-section .section-title { color: var(--cream); }
+  .contact-section .section-sub { color: rgba(253,246,236,0.6); }
+  .contact-section .section-label { color: var(--gold); }
+
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(201,146,42,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .contact-item-title { font-size: 0.8rem; color: var(--gold); font-weight: 600; margin-bottom: 0.2rem; }
+  .contact-item-val { font-size: 0.95rem; color: var(--cream); }
+
+  .contact-form {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,146,42,0.15);
+    border-radius: 24px;
+    padding: 2.5rem;
+  }
+
+  .form-group { margin-bottom: 1.2rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(253,246,236,0.7);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(201,146,42,0.2);
+    border-radius: 10px;
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(253,246,236,0.3); }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--gold); }
+
+  .form-group textarea { height: 110px; resize: none; }
+
+  .form-group select option { background: var(--deep); color: var(--cream); }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: var(--saffron);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .submit-btn:hover { background: var(--gold); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0D0500;
+    padding: 3rem 5% 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--saffron);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-logo span { color: var(--gold); }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: rgba(253,246,236,0.4);
+    margin-bottom: 1.5rem;
+    font-family: 'Tiro Tamil', serif;
+    font-style: italic;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .footer-links a {
+    font-size: 0.82rem;
+    color: rgba(253,246,236,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 1.5rem;
+    font-size: 0.78rem;
+    color: rgba(253,246,236,0.25);
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 5%; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 5% 3rem; }
+    .hero-visual { order: -1; }
+    .food-header, .books-header, .contact-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .stats-bar { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">ழ<span>கரம்</span></a>
+  <ul class="nav-links">
+    <li><a href="#food">Food</a></li>
+    <li><a href="#books">Books</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#contact" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+
+  <div class="hero-text">
+    <div class="hero-eyebrow">Mannar Favourite</div>
+    <h1 class="hero-title">
+      <span class="highlight">Lagaram</span>
+      Food & Books
+      <span class="tamil">சுவையும் அறிவும் ஒரே இடத்தில்</span>
+    </h1>
+    <p class="hero-desc">
+      Freshly prepared dishes delivered hot to your door — and a curated collection of books to feed your mind. Two passions, one beautiful place.
+    </p>
+    <div class="hero-btns">
+      <a href="#food" class="btn-primary">🍛 Order Food</a>
+      <a href="#books" class="btn-secondary">📚 Browse Books</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-card-emoji">🍛</div>
+      <div class="hero-card-title">Biriyani Specials</div>
+      <div class="hero-card-sub">Dum-style, freshly cooked</div>
+      <span class="badge badge-food">Food</span>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-emoji">📖</div>
+      <div class="hero-card-title">Tamil Classics</div>
+      <div class="hero-card-sub">Thirukkural & beyond</div>
+      <span class="badge badge-book">Books</span>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-emoji">🥘</div>
+      <div class="hero-card-title">Home Combos</div>
+      <div class="hero-card-sub">Meal + Book bundles</div>
+      <span class="badge badge-food">Food</span>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-emoji">🌟</div>
+      <div class="hero-card-title">New Arrivals</div>
+      <div class="hero-card-sub">Fresh titles every week</div>
+      <span class="badge badge-book">Books</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-number">500+</div><div class="stat-label">Happy Customers</div></div>
+  <div class="stat"><div class="stat-number">30+</div><div class="stat-label">Food Items</div></div>
+  <div class="stat"><div class="stat-number">200+</div><div class="stat-label">Books in Stock</div></div>
+  <div class="stat"><div class="stat-number">4.9★</div><div class="stat-label">Customer Rating</div></div>
+</div>
+
+<!-- FOOD -->
+<section class="food-section" id="food">
+  <div class="food-header fade-in">
+    <div>
+      <div class="section-label">🍽️ Our Menu</div>
+      <h2 class="section-title">Homestyle Food,<br>Delivered Fresh</h2>
+    </div>
+    <p class="section-sub">Every dish is made with love and traditional recipes passed down through generations. Hot food, fast delivery.</p>
+  </div>
+
+  <div class="food-grid">
+    <div class="food-card fade-in">
+      <div class="food-img food-img-bg1">🍛</div>
+      <div class="food-body">
+        <div class="food-name">Chicken Biriyani</div>
+        <div class="food-desc-text">Fragrant basmati, tender chicken, secret spice blend</div>
+        <div class="food-footer">
+          <div class="food-price">₹180 <span>/ serving</span></div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="food-card fade-in">
+      <div class="food-img food-img-bg2">🍲</div>
+      <div class="food-body">
+        <div class="food-name">Mutton Kuzhambu</div>
+        <div class="food-desc-text">Slow-cooked mutton in rich chettinad gravy</div>
+        <div class="food-footer">
+          <div class="food-price">₹220 <span>/ serving</span></div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="food-card fade-in">
+      <div class="food-img food-img-bg3">🌿</div>
+      <div class="food-body">
+        <div class="food-name">Veg Meals</div>
+        <div class="food-desc-text">Full thali — sambar, rasam, 3 curries & more</div>
+        <div class="food-footer">
+          <div class="food-price">₹120 <span>/ plate</span></div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="food-card fade-in">
+      <div class="food-img food-img-bg4">🥞</div>
+      <div class="food-body">
+        <div class="food-name">Pongal + Vadai</div>
+        <div class="food-desc-text">Morning comfort — creamy pongal, crispy medu vadai</div>
+        <div class="food-footer">
+          <div class="food-price">₹80 <span>/ serving</span></div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="food-card fade-in">
+      <div class="food-img food-img-bg5">🍜</div>
+      <div class="food-body">
+        <div class="food-name">Kothu Parotta</div>
+        <div class="food-desc-text">Street-style egg kothu with spicy masala</div>
+        <div class="food-footer">
+          <div class="food-price">₹100 <span>/ plate</span></div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="food-card fade-in">
+      <div class="food-img food-img-bg6">☕</div>
+      <div class="food-body">
+        <div class="food-name">Filter Coffee</div>
+        <div class="food-desc-text">Traditional decoction, farm-fresh milk, frothy finish</div>
+        <div class="food-footer">
+          <div class="food-price">₹30 <span>/ cup</span></div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">✦</span></div>
+
+<!-- BOOKS -->
+<section class="books-section" id="books">
+  <div class="books-header fade-in">
+    <div>
+      <div class="section-label">📚 Our Collection</div>
+      <h2 class="section-title">Books That<br>Inspire & Delight</h2>
+    </div>
+    <p class="section-sub">From timeless Tamil literature to modern bestsellers — browse, pick, and pair it with your favourite meal from Lagaram.</p>
+  </div>
+
+  <div class="books-grid">
+    <div class="book-card fade-in">
+      <div class="book-cover book-cover-1">
+        <div class="book-spine"></div>
+        📜
+      </div>
+      <div class="book-body">
+        <div class="book-genre">Tamil Classic</div>
+        <div class="book-title">Thirukkural</div>
+        <div class="book-author">Thiruvalluvar</div>
+        <div class="book-footer">
+          <div class="book-price">₹150</div>
+          <button class="book-btn">Buy</button>
+        </div>
+      </div>
+    </div>
+    <div class="book-card fade-in">
+      <div class="book-cover book-cover-2">
+        <div class="book-spine"></div>
+        🗡️
+      </div>
+      <div class="book-body">
+        <div class="book-genre">Historical</div>
+        <div class="book-title">Ponniyin Selvan</div>
+        <div class="book-author">Kalki Krishnamurthy</div>
+        <div class="book-footer">
+          <div class="book-price">₹350</div>
+          <button class="book-btn">Buy</button>
+        </div>
+      </div>
+    </div>
+    <div class="book-card fade-in">
+      <div class="book-cover book-cover-3">
+        <div class="book-spine"></div>
+        🚀
+      </div>
+      <div class="book-body">
+        <div class="book-genre">Self Help</div>
+        <div class="book-title">Wings of Fire</div>
+        <div class="book-author">A.P.J. Abdul Kalam</div>
+        <div class="book-footer">
+          <div class="book-price">₹199</div>
+          <button class="book-btn">Buy</button>
+        </div>
+      </div>
+    </div>
+    <div class="book-card fade-in">
+      <div class="book-cover book-cover-4">
+        <div class="book-spine"></div>
+        🌹
+      </div>
+      <div class="book-body">
+        <div class="book-genre">Tamil Novel</div>
+        <div class="book-title">Sivagamiyin Sabatham</div>
+        <div class="book-author">Kalki</div>
+        <div class="book-footer">
+          <div class="book-price">₹280</div>
+          <button class="book-btn">Buy</button>
+        </div>
+      </div>
+    </div>
+    <div class="book-card fade-in">
+      <div class="book-cover book-cover-5">
+        <div class="book-spine"></div>
+        🧠
+      </div>
+      <div class="book-body">
+        <div class="book-genre">Philosophy</div>
+        <div class="book-title">Yoga Vasistham</div>
+        <div class="book-author">Valmiki</div>
+        <div class="book-footer">
+          <div class="book-price">₹240</div>
+          <button class="book-btn">Buy</button>
+        </div>
+      </div>
+    </div>
+    <div class="book-card fade-in">
+      <div class="book-cover book-cover-6">
+        <div class="book-spine"></div>
+        ✨
+      </div>
+      <div class="book-body">
+        <div class="book-genre">Motivational</div>
+        <div class="book-title">Agni Siragugal</div>
+        <div class="book-author">A.P.J. Abdul Kalam</div>
+        <div class="book-footer">
+          <div class="book-price">₹180</div>
+          <button class="book-btn">Buy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-section" id="why">
+  <div style="text-align:center" class="fade-in">
+    <div class="section-label" style="justify-content:center">💛 Why Lagaram</div>
+    <h2 class="section-title">More Than Just a Shop</h2>
+    <p class="section-sub" style="margin:0 auto">We believe good food and good books make life richer. That's the Lagaram promise.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card fade-in">
+      <div class="why-icon wi-1">🔥</div>
+      <h3>Fresh & Hot Always</h3>
+      <p>Every order is cooked fresh. No pre-cooked batches. Your food arrives hot, just like mom made it.</p>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon wi-2">🚴</div>
+      <h3>Fast Delivery</h3>
+      <p>Within your area in 30–45 minutes. We respect your time and your hunger equally.</p>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon wi-3">📚</div>
+      <h3>Curated Books</h3>
+      <p>Every book in our collection is handpicked. Tamil classics, bestsellers, children's books and more.</p>
+    </div>
+    <div class="why-card fade-in">
+      <div class="why-icon wi-4">🎁</div>
+      <h3>Meal + Book Bundles</h3>
+      <p>Order a meal and a book together and get special combo discounts. Perfect for a quiet evening.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div style="text-align:center" class="fade-in">
+    <div class="section-label" style="justify-content:center">💬 Reviews</div>
+    <h2 class="section-title">What Our Customers Say</h2>
+  </div>
+
+  <div class="testi-grid">
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Biriyani was absolutely amazing! And they delivered a copy of Ponniyin Selvan along with it. Best combo ever from Lagaram.</p>
+      <div class="testi-person">
+        <div class="testi-avatar">👩</div>
+        <div>
+          <div class="testi-name">Kavitha R.</div>
+          <div class="testi-loc">Anna Nagar</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">இந்த கடை மிகவும் நல்லது! சாப்பாடும் புத்தகமும் ஒரே இடத்தில் கிடைக்கிறது. Lagaram rocks!</p>
+      <div class="testi-person">
+        <div class="testi-avatar">👨</div>
+        <div>
+          <div class="testi-name">Murugan K.</div>
+          <div class="testi-loc">T.Nagar</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Ordered Kothu Parotta and Wings of Fire together — perfect Friday night. Fast delivery and great quality. Highly recommended!</p>
+      <div class="testi-person">
+        <div class="testi-avatar">👩</div>
+        <div>
+          <div class="testi-name">Priya S.</div>
+          <div class="testi-loc">Velachery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="fade-in">
+      <div class="section-label">📞 Get In Touch</div>
+      <h2 class="section-title">Order Now or<br>Visit Us</h2>
+      <p class="section-sub">Place your order, ask about our books, or just say hello. We're always happy to hear from you.</p>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-title">Location</div>
+            <div class="contact-item-val">12, Main Street, Chennai – 600001</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-item-title">Phone / WhatsApp</div>
+            <div class="contact-item-val">+91 98765 43210</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-item-title">Working Hours</div>
+            <div class="contact-item-val">Mon–Sun · 8:00 AM – 10:00 PM</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-item-title">Email</div>
+            <div class="contact-item-val">hello@lagaram.in</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form fade-in">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Murugan K.">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 98765 43210">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Order Type</label>
+        <select>
+          <option>🍛 Food Delivery</option>
+          <option>📚 Buy Books</option>
+          <option>🎁 Food + Book Combo</option>
+          <option>💬 General Enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Address / Message</label>
+        <textarea placeholder="Enter your delivery address or write your message..."></textarea>
+      </div>
+      <button class="submit-btn">Send Order Request 🚀</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Laga<span>ram</span></div>
+  <div class="footer-tagline">சுவையும் அறிவும் ஒரே இடத்தில் · Food & Books · Est. 2024</div>
+  <ul class="footer-links">
+    <li><a href="#food">Food Menu</a></li>
+    <li><a href="#books">Book Store</a></li>
+    <li><a href="#why">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-bottom">© 2024 Lagaram. Made with ❤️ in Chennai.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Add button feedback
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const orig = this.textContent;
+      this.textContent = '✓';
+      this.style.background = '#2d6a4f';
+      setTimeout(() => {
+        this.textContent = orig;
+        this.style.background = '';
+      }, 1500);
+    });
+  });
+
+  // Book buy feedback
+  document.querySelectorAll('.book-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const orig = this.textContent;
+      this.textContent = '✓ Added';
+      this.style.background = '#c9922a';
+      this.style.color = '#1a0a00';
+      setTimeout(() => {
+        this.textContent = orig;
+        this.style.background = '';
+        this.style.color = '';
+      }, 1500);
+    });
+  });
+
+  // Form submit
+  document.querySelector('.submit-btn').addEventListener('click', function() {
+    this.textContent = '✅ Order Received!';
+    this.style.background = '#2d6a4f';
+    setTimeout(() => {
+      this.textContent = 'Send Order Request 🚀';
+      this.style.background = '';
+    }, 2500);
+  });
+</script>
+</body>
+</html>
